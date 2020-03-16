@@ -1,4 +1,4 @@
-/* ------------------------------------------------------------------------ *  
+/* ------------------------------------------------------------------------ *
 4 states per letter. Transparent, Line, Block and Visible.
 These states are shuffled for a unique "decode" effect each time.
 * ------------------------------------------------------------------------ */
@@ -18,14 +18,14 @@ function decodeText(){
 
     // shuffle the array to get new sequences each time
     var shuffled = shuffle(state);
- 
+
     for(var i = 0, j = shuffled.length; i < j; i++ ){
         var child = text.children[shuffled[i]];
         classes = child.classList;
 
         // fire the first one at random times
         var state1Time = Math.round( Math.random() * (2000 - 300) ) + 50;
-        if(classes.contains('text-animation')){ 
+        if(classes.contains('text-animation')){
             setTimeout(firstStages.bind(null, child), state1Time);
         }
     }
@@ -33,20 +33,20 @@ function decodeText(){
 
 // send the node for later .state changes
 function firstStages(child){
-    if( child.classList.contains('state-2') ){   
+    if( child.classList.contains('state-2') ){
         child.classList.add('state-3');
     } else if( child.classList.contains('state-1') ){
         child.classList.add('state-2')
     } else if( !child.classList.contains('state-1') ){
         child.classList.add('state-1');
         setTimeout(secondStages.bind(null, child), 100);
-    }    
+    }
 }
 function secondStages(child){
     if( child.classList.contains('state-1') ){
         child.classList.add('state-2')
         setTimeout(thirdStages.bind(null, child), 100);
-    } 
+    }
     else if( !child.classList.contains('state-1') )
     {
         child.classList.add('state-1')
